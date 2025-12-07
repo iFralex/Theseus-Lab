@@ -6,8 +6,8 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   basePath: "/Theseus-Lab",
-  assetPrefix: "/Theseus-Lab/",
-    images: {
+  assetPrefix: "/Theseus-Lab",
+  images: {
     unoptimized: true,
   },
 };
