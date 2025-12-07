@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   },
   basePath: "/Theseus-Lab",
   assetPrefix: "/Theseus-Lab/",
+    images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
