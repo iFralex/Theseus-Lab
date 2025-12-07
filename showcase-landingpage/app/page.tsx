@@ -1,581 +1,281 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-// ProjectShowcase - single-file, modular Next.js React component
-// Tailwind-based, palette: white, lilla (#F6EEFF), violet (#6C3D9A)
-// Contains: Hero, Overview, Team, ProcessSteps, CTA, Footer
-// All components accept props so they're easy to modify or reuse.
+// Inklusion Project Showcase - Team THESEUS
+// Enhanced design with consistent color palette: white, lilla (#F6EEFF), violet (#6C3D9A)
 
-// ------ Sample data (editable) ------
-const TEAM = [
+// ------ Team Data ------
+const TEAM_MEMBERS = [
   {
     id: 1,
-    name: "Giulia Rossi",
-    role: "Product Lead & Accessibility Specialist",
-    bio: "Coordinamento prodotto, ricerca user-centered e validazione dei pattern di accessibilità per utenza con disabilità visive.",
-    email: "giulia.rossi@example.com",
-    photo: null,
+    name: "Alessio Brambilla",
+    role: "Team Lead & Research",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alessio1&backgroundColor=c084fc"
   },
   {
     id: 2,
-    name: "Marco Bianchi",
-    role: "Full-stack Developer",
-    bio: "Implementazione front-end accessibile (React/Next.js) e integrazione back-end per gestione contenuti didattici.",
-    email: "marco.bianchi@example.com",
-    photo: null,
+    name: "Davide Celia",
+    role: "UX Designer",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Davide&backgroundColor=a855f7"
   },
   {
     id: 3,
-    name: "Aisha El-Sayed",
-    role: "UX Researcher",
-    bio: "Ricerca etnografica e test con utenti ipovedenti e non vedenti, co-progettazione con associazioni.",
-    email: "aisha.elsayed@example.com",
-    photo: null,
+    name: "Dennis Ferrari",
+    role: "Developer",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Dennis&backgroundColor=c084fc"
   },
   {
     id: 4,
-    name: "Luca Ferri",
-    role: "AI & Speech Engineer",
-    bio: "Sistemi text-to-speech avanzati, personalizzazione vocale e sintesi ottimizzata per studio e ripasso.",
-    email: "luca.ferri@example.com",
-    photo: null,
+    name: "Denise Luzzi",
+    role: "Accessibility Specialist",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Denise&backgroundColor=7c3aed"
   },
   {
     id: 5,
-    name: "Elena Moretti",
-    role: "Instructional Designer",
-    bio: "Progettazione dei contenuti didattici accessibili: microlearning, strutture a moduli e valutazioni formative.",
-    email: "elena.moretti@example.com",
-    photo: null,
+    name: "Alessio Antonucci",
+    role: "Product Manager",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alessio2&backgroundColor=a855f7"
   },
   {
     id: 6,
-    name: "Tomás Alvarez",
-    role: "Front-end Animator & Visual Designer",
-    bio: "Animazioni leggere e pattern visivi coerenti con paletta bianco / lilla / violetto; ottimizzazione performance.",
-    email: "tomas.alvarez@example.com",
-    photo: null,
-  },
+    name: "Emanuele Parinetti",
+    role: "System Architect",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emanuele&backgroundColor=c084fc"
+  }
 ];
 
-
+// ------ Process Steps ------
 const PROCESS_STEPS = [
   {
     step: 1,
-    title: "Ricerca e coinvolgimento utenti",
-    summary: "Coinvolgere persone con disabilità visive nella fase iniziale, condurre interviste approfondite e test di contesto.",
+    title: "Individuazione dei Task",
+    summary: "Analisi approfondita degli scenari d'uso e identificazione dei task fondamentali per gli utenti ipovedenti nel contesto dello studio universitario.",
     details: [
-      "Mapping degli stakeholder (famiglie, insegnanti, associazioni)",
-      "Sessioni di co-design con utenti ipovedenti e non vedenti",
-      "Raccolta di bisogni, barriere e pattern di studio esistenti"
+      "Studio del contesto: casa, università, luoghi con connessione internet",
+      "Identificazione di task semplici, moderati e complessi",
+      "Analisi delle necessità di Pietro, Angelo e Gloria (utenti tipo)"
     ],
     icon: "🔍",
     color: "from-purple-500 to-violet-600",
     bgColor: "bg-purple-50",
-    slidePreview: "/imgs/c1.png",
-    slideUrl: "#"
+    slidePreview: "/imgs/c1.png"
   },
   {
     step: 2,
-    title: "Progettazione inclusiva e prototipazione",
-    summary: "Sviluppare pattern di UI compatibili con screen reader, contrasto ottimale, e un layout semplificato per navigazione vocale.",
+    title: "Storyboard e Progettazione",
+    summary: "Creazione di storyboard dettagliati e definizione dell'architettura del sistema per garantire un'esperienza fluida e accessibile.",
     details: [
-      "Wireframe semplificati e flussi vocali",
-      "Componenti ARIA-first: landmark, roles e live regions",
-      "Prototipi testabili (audio-first & keyboard-only)"
+      "Storyboard per ricerca documenti e lettura assistita",
+      "Progettazione interfaccia vocale e grafica semplificata",
+      "Definizione dei flussi di interazione principali"
     ],
     icon: "✏️",
     color: "from-violet-500 to-purple-600",
     bgColor: "bg-violet-50",
-    slidePreview: "/imgs/c2.png",
-    slideUrl: "#"
+    slidePreview: "/imgs/c2.png"
   },
   {
     step: 3,
-    title: "Implementazione tecnica e integrazione TTS",
-    summary: "Costruire la piattaforma con Next.js, integrare motori TTS personalizzabili, e API per contenuti didattici accessibili.",
+    title: "Prototyping Desktop e Mobile",
+    summary: "Sviluppo di prototipi funzionali per entrambe le piattaforme, con focus particolare sulla versione desktop per l'ambiente di studio ottimale.",
     details: [
-      "Architettura: SSR per performance e SEO accessibile",
-      "Personalizzazione vocale (velocità, tono, pronuncia)",
-      "Supporto offline parziale e sincronizzazione progressi"
+      "Prototipo desktop con workflow fluido e schermi ampi",
+      "Prototipo mobile per uso dinamico e in mobilità",
+      "Test di usabilità con utenti target"
     ],
     icon: "⚙️",
     color: "from-purple-600 to-violet-500",
     bgColor: "bg-purple-50",
-    slidePreview: "/imgs/c3.png",
-    slideUrl: "#"
+    slidePreview: "/imgs/c3.png"
   },
   {
     step: 4,
-    title: "Validazione, lancio e roadmap educativa",
-    summary: "Test quantitativi e qualitativi su larga scala, rilascio a gruppi pilota e roadmap per scalare contenuti e integrazioni.",
+    title: "Validazione e Scelta Finale",
+    summary: "Valutazione comparativa delle soluzioni e scelta della piattaforma desktop come ambiente principale per garantire la migliore esperienza di studio.",
     details: [
-      "Metriche d'impatto: retention, efficacia degli learning-path",
-      "Piano di formazione insegnanti e caregiver",
-      "Iterazione continua basata su feedback reali"
+      "Analisi punti di forza: assistente vocale, hub centrale, gestione file",
+      "Valutazione punti di debolezza e soluzioni proposte",
+      "Scelta desktop per supporto screen reader completo e gestione file stabile"
     ],
     icon: "🚀",
     color: "from-violet-600 to-purple-500",
     bgColor: "bg-violet-50",
-    slidePreview: "/imgs/c4.png",
-    slideUrl: "#"
+    slidePreview: "/imgs/c4.png"
   },
 ];
 
-// ------ Helper small components ------
-const Accent = ({ children }) => (
-  <span className="font-semibold" style={{ color: "#6C3D9A" }}>
-    {children}
-  </span>
-);
-
-// Avatar placeholder - modular (accepts photo URL or initials)
-const Avatar = ({ name, photo, size = 48 }) => {
-  const initials = name
-    .split(" ")
-    .map((n) => n[0])
-    .slice(0, 2)
-    .join("");
+// ------ Hero Section ------
+export function Hero() {
   return (
-    <div
-      className="flex items-center justify-center rounded-full bg-white shadow-sm"
-      style={{ width: size, height: size }}
-      aria-hidden
-    >
-      {photo ? (
-        <img src={photo} alt={`${name} avatar`} className="rounded-full" />
-      ) : (
-        <div className="text-sm font-medium text-violet-700">{initials}</div>
-      )}
-    </div>
-  );
-};
+    <header className="relative overflow-hidden bg-gradient-to-br from-white via-[#F6EEFF] to-[#E8D5FF]">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-purple-300/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-violet-300/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+      </div>
 
-// ------ Major sections ------
-export function Hero({ title, subtitle, ctaText = "Scopri di più", onCta }) {
-  return (
-    <header className="relative overflow-hidden">
-      <div
-        className="py-20 px-6 sm:px-12 lg:px-24"
-        style={{ background: "linear-gradient(180deg,#fff,#F6EEFF)" }}
-      >
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ x: -40, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
-              <span className="block text-gray-900">{title}</span>
-              <span className="block mt-2 text-lg text-gray-700">{subtitle}</span>
-            </h1>
-
-            <p className="mt-6 max-w-xl text-gray-600">
-              Una piattaforma pensata per rendere lo studio accessibile, efficiente
-              e piacevole per persone con disabilità visive. Interfacce vocali,
-              contenuti riprogettati e un flusso di apprendimento modulare.
-            </p>
-
-            <div className="mt-8 flex gap-4">
-              <button
-                onClick={onCta}
-                className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl shadow-lg bg-violet-600 text-white font-medium hover:scale-105 transform transition"
-                style={{ boxShadow: "0 6px 18px rgba(108,61,154,0.18)" }}
+      <div className="relative py-24 px-6 sm:px-12 lg:px-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Content */}
+            <motion.div
+              initial={{ x: -60, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="inline-block mb-6"
               >
-                {ctaText}
-              </button>
+                <div className="px-6 py-2 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-full text-sm font-bold shadow-lg">
+                  Team THESEUS
+                </div>
+              </motion.div>
 
-              <a
-                className="inline-flex items-center px-4 py-3 rounded-2xl border border-transparent bg-white text-violet-700 font-medium shadow-sm"
-                href="#team"
-              >
-                Il Team
-              </a>
-            </div>
-          </motion.div>
+              <h1 className="text-6xl sm:text-7xl font-black leading-tight mb-6">
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-violet-600 to-purple-700">
+                  Inklusion
+                </span>
+              </h1>
 
-          <motion.div
-            initial={{ scale: 0.96, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.12 }}
-            className="relative"
-            aria-hidden
-          >
-            {/* Visual sample: a stylized device mockup with simple shapes */}
-            <div className="mx-auto w-full max-w-md bg-gradient-to-br from-white to-[#F6EEFF] rounded-3xl p-6 shadow-2xl">
-              <div className="h-72 rounded-xl border-2 border-dashed border-violet-200 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-violet-700">Audio-first</div>
-                  <div className="mt-2 text-sm text-gray-500 max-w-xs">
-                    Interfaccia semplificata per navigazione vocale, ripasso con
-                    audio e note strutturate.
+              <p className="text-3xl font-bold text-gray-800 mb-6">
+                L'inclusione è il nostro formato
+              </p>
+
+              <p className="text-xl text-gray-700 leading-relaxed mb-8 max-w-xl">
+                Un hub centrale che rende la scrittura e la lettura accessibili a tutti,
+                senza barriere. Trasforma, unifica e gestisce tutto il materiale didattico
+                in un unico spazio, con particolare attenzione al linguaggio matematico.
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="#steps"
+                  className="px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-violet-600 text-white font-bold text-lg shadow-2xl hover:shadow-purple-500/50 transition-all"
+                >
+                  Scopri il Progetto
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="#team"
+                  className="px-8 py-4 rounded-2xl bg-white border-2 border-purple-300 text-purple-700 font-bold text-lg shadow-lg hover:border-purple-400 hover:bg-purple-50 transition-all"
+                >
+                  Il Team
+                </motion.a>
+              </div>
+            </motion.div>
+
+            {/* Right Visual */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 40 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative"
+            >
+              <div className="relative">
+                {/* Main Card */}
+                <div className="relative bg-white rounded-3xl p-8 shadow-2xl border-4 border-purple-200">
+                  <div className="space-y-6">
+                    {/* Icon Grid */}
+                    <div className="grid grid-cols-3 gap-4">
+                      {['📁', '🔄', '🔍', '🎤', '📊', '⭐'].map((icon, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ scale: 0, rotate: -180 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          transition={{ delay: 0.5 + i * 0.1, type: "spring" }}
+                          className="aspect-square rounded-2xl bg-gradient-to-br from-purple-100 to-violet-100 flex items-center justify-center text-4xl"
+                        >
+                          {icon}
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* Feature List */}
+                    <div className="space-y-3 pt-4">
+                      {['Gestisci Risorse', 'Converti File', 'Analizza Contenuti', 'Assistente Vocale'].map((text, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ x: -20, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{ delay: 0.8 + i * 0.1 }}
+                          className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-purple-50 to-violet-50"
+                        >
+                          <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-violet-600" />
+                          <span className="text-gray-700 font-medium">{text}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Corner Accent */}
+                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-violet-400 to-purple-600 rounded-2xl rotate-12 shadow-xl flex items-center justify-center text-4xl">
+                    💜
                   </div>
                 </div>
+
+                {/* Floating Elements */}
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="absolute -top-6 -left-6 w-16 h-16 bg-gradient-to-br from-purple-400 to-violet-500 rounded-full shadow-lg"
+                />
+                <motion.div
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity }}
+                  className="absolute -bottom-4 -right-4 w-20 h-20 bg-gradient-to-br from-violet-400 to-purple-500 rounded-full shadow-lg"
+                />
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </header>
   );
 }
 
+// ------ Mission & Goals Section ------
+export function MissionGoals() {
+  const goals = [
+    {
+      title: "Compatibilità Universale",
+      desc: "Convertire e standardizzare tutti i formati di file per renderli leggibili dai software di screen-reading.",
+      icon: "🔄",
+      color: "from-purple-500 to-violet-600"
+    },
+    {
+      title: "Linguaggio Matematico",
+      desc: "Supporto completo per formule e simboli matematici, spesso incompatibili con i lettori standard.",
+      icon: "∑",
+      color: "from-violet-500 to-purple-600"
+    },
+    {
+      title: "Gestione Centralizzata",
+      desc: "Hub unico per raggruppare, organizzare e gestire tutto il materiale didattico in modo gerarchico.",
+      icon: "📚",
+      color: "from-purple-600 to-violet-500"
+    },
+    {
+      title: "Assistenza Vocale",
+      desc: "Interfaccia vocale completa per ogni funzione, accessibile con comandi naturali e shortcut personalizzabili.",
+      icon: "🎤",
+      color: "from-violet-600 to-purple-500"
+    },
+  ];
 
-const mission = "Sviluppare una piattaforma educativa accessibile che permetta a persone con disabilità visive di studiare in autonomia usando interfacce audio-first, testi strutturati e percorsi adattivi.";
-
-const goals = [
-  { 
-    title: "Accessibilità reale", 
-    desc: "Implementare pattern che funzionino con screen reader e input vocale.",
-    icon: "♿",
-    color: "from-purple-500 to-violet-600"
-  },
-  { 
-    title: "Apprendimento adattivo", 
-    desc: "Percorsi che si adattano allo stile di apprendimento e ritmo dell'utente.",
-    icon: "🎯",
-    color: "from-violet-500 to-purple-600"
-  },
-  { 
-    title: "Coinvolgimento sociale", 
-    desc: "Strumenti per insegnanti e caregiver per supportare il processo educativo.",
-    icon: "🤝",
-    color: "from-purple-600 to-violet-500"
-  },
-  { 
-    title: "Scalabilità tecnica", 
-    desc: "Architettura solida per gestire contenuti e integrazioni TTS custom.",
-    icon: "⚡",
-    color: "from-violet-600 to-purple-500"
-  },
-];
-
-export function Overview() {
   return (
-    <section className="relative py-24 px-6 sm:px-12 lg:px-24 bg-gradient-to-br from-white via-purple-50/30 to-violet-50/40 overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-200/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-violet-200/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", duration: 0.8, delay: 0.2 }}
-            className="inline-block mb-6"
-          >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-violet-600 rounded-3xl blur-xl opacity-50" />
-              <div className="relative w-20 h-20 rounded-3xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-2xl flex items-center justify-center">
-                <span className="text-4xl">📚</span>
-              </div>
-            </div>
-          </motion.div>
-          
-          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-4">
-            Descrizione del Progetto
-          </h2>
-        </motion.div>
-
-        {/* Mission Statement - Large Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="mb-16"
-        >
-          <div className="relative group">
-            {/* Glow effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-violet-600 rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity" />
-            
-            <div className="relative bg-white rounded-3xl p-10 md:p-12 shadow-2xl border-2 border-purple-100">
-              {/* Corner accent */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-100 to-transparent rounded-tr-3xl rounded-bl-full opacity-50" />
-              
-              <div className="relative">
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 }}
-                  className="flex items-center gap-3 mb-6"
-                >
-                  <div className="w-12 h-1 bg-gradient-to-r from-purple-500 to-violet-600 rounded-full" />
-                  <span className="text-sm font-bold text-purple-600 uppercase tracking-wider">La Nostra Mission</span>
-                </motion.div>
-                
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6 }}
-                  className="text-2xl md:text-3xl text-gray-800 leading-relaxed font-light"
-                >
-                  {mission}
-                </motion.p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Goals Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-8"
-        >
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-1 bg-gradient-to-r from-violet-500 to-purple-600 rounded-full" />
-            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600">
-              I Nostri Obiettivi
-            </h3>
-          </div>
-        </motion.div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {goals.map((goal, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ 
-                duration: 0.5, 
-                delay: 0.5 + i * 0.1,
-                type: "spring"
-              }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative"
-            >
-              {/* Hover glow */}
-              <div className={`absolute -inset-0.5 bg-gradient-to-r ${goal.color} rounded-2xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-300`} />
-              
-              <div className="relative h-full bg-white rounded-2xl p-6 shadow-lg border-2 border-purple-100 group-hover:border-transparent transition-all duration-300">
-                {/* Icon */}
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                  className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${goal.color} shadow-lg mb-4`}
-                >
-                  <span className="text-3xl">{goal.icon}</span>
-                </motion.div>
-
-                {/* Title */}
-                <h4 className={`text-xl font-bold mb-3  bg-clip-text bg-gradient-to-r ${goal.color}`}>
-                  {goal.title}
-                </h4>
-
-                {/* Description */}
-                <p className="text-gray-600 leading-relaxed">
-                  {goal.desc}
-                </p>
-
-                {/* Bottom accent line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-purple-300 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Bottom decorative element */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 1, duration: 0.8 }}
-          className="mt-16 flex justify-center"
-        >
-          <div className="flex items-center gap-2">
-            {[...Array(4)].map((_, i) => (
-              <motion.div
-                key={i}
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 1.2 + i * 0.1, type: "spring" }}
-                className={`w-3 h-3 rounded-full bg-gradient-to-r ${goals[i].color}`}
-              />
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-const teamMembers = [
-  {
-    id: 1,
-    name: "Sofia Rossi",
-    role: "CEO & Founder",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sofia&backgroundColor=c084fc"
-  },
-  {
-    id: 2,
-    name: "Marco Bianchi",
-    role: "Lead Developer",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Marco&backgroundColor=a855f7"
-  },
-  {
-    id: 3,
-    name: "Elena Conti",
-    role: "UX Designer",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Elena&backgroundColor=c084fc"
-  },
-  {
-    id: 4,
-    name: "Luca Ferrari",
-    role: "Marketing Director",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Luca&backgroundColor=7c3aed"
-  },
-  {
-    id: 5,
-    name: "Giulia Marino",
-    role: "Product Manager",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Giulia&backgroundColor=a855f7"
-  },
-  {
-    id: 6,
-    name: "Alessandro Romano",
-    role: "Tech Lead",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alessandro&backgroundColor=c084fc"
-  }
-];
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-};
-
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0 }
-};
-
-export function Team() {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-violet-50 py-16 px-4">
+    <section className="relative py-24 px-6 sm:px-12 lg:px-24 bg-gradient-to-b from-white to-[#F6EEFF]">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-4">
-            Il Nostro Team
-          </h1>
-          <p className="text-lg text-purple-700 max-w-2xl mx-auto">
-            Le persone straordinarie che rendono possibile la nostra visione
-          </p>
-        </motion.div>
-
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {teamMembers.map((member) => (
-            <motion.div
-              key={member.id}
-              variants={item}
-              whileHover={{
-                y: -10,
-                transition: { duration: 0.3 }
-              }}
-              className="group"
-            >
-              <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-purple-100 hover:border-violet-300 transition-all duration-300 hover:shadow-2xl">
-                <div className="relative overflow-hidden bg-gradient-to-br from-purple-200 to-violet-200 h-64">
-                  <motion.img
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.4 }}
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-violet-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-
-                <div className="p-6 text-center">
-                  <motion.h3
-                    className="text-2xl font-bold text-gray-800 mb-2"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    {member.name}
-                  </motion.h3>
-                  <motion.p
-                    className="text-purple-600 font-medium"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    {member.role}
-                  </motion.p>
-
-                  <div className="mt-4 flex justify-center space-x-3">
-                    <motion.div
-                      whileHover={{ scale: 1.2, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center cursor-pointer hover:bg-violet-200 transition-colors"
-                    >
-                      <span className="text-purple-600 text-sm">in</span>
-                    </motion.div>
-                    <motion.div
-                      whileHover={{ scale: 1.2, rotate: -5 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center cursor-pointer hover:bg-violet-200 transition-colors"
-                    >
-                      <span className="text-purple-600 text-sm">@</span>
-                    </motion.div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </div>
-  );
-}
-
-export function ProcessSteps({ steps = PROCESS_STEPS }) {
-  const [hoveredStep, setHoveredStep] = useState(null);
-
-  return (
-    <section className="min-h-screen py-20 px-6 sm:px-12 lg:px-24 bg-gradient-to-br from-white via-purple-50/30 to-violet-50/50 relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-200/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-
-      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
           <motion.div
@@ -583,186 +283,637 @@ export function ProcessSteps({ steps = PROCESS_STEPS }) {
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", duration: 0.8 }}
-            className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-full text-sm font-semibold shadow-lg"
+            className="inline-block mb-6"
           >
-            Il Nostro Processo
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-violet-600 rounded-3xl blur-xl opacity-50" />
+              <div className="relative w-24 h-24 rounded-3xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-2xl flex items-center justify-center">
+                <span className="text-5xl">🎯</span>
+              </div>
+            </div>
           </motion.div>
+
           <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-6">
-            Processo di Lavoro
+            Il Nostro Obiettivo
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Quattro step chiave, iterativi e verificabili con utenti reali per creare un'esperienza educativa accessibile e inclusiva
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Studiare è un diritto di tutti e aiutare chi è in difficoltà è il nostro scopo
           </p>
         </motion.div>
 
-        {/* Steps */}
-        <div className="space-y-16">
-          {steps.map((s, index) => (
-            <motion.div
-              key={s.step}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              onMouseEnter={() => setHoveredStep(s.step)}
-              onMouseLeave={() => setHoveredStep(null)}
-              className="relative"
-            >
-              <div className={`grid lg:grid-cols-2 items-center rounded-3xl shadow-2xl border-4 border-violet-500 overflow-hidden ${s.bgColor} ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-                {/* Step Number Badge */}
-                <motion.div
-                  initial={{ rotate: -180, opacity: 0 }}
-                  whileInView={{ rotate: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ type: "spring", duration: 1, delay: 0.3 }}
-                  className={`absolute -left-4 -top-4 w-16 h-16 rounded-2xl bg-gradient-to-br ${s.color} shadow-2xl flex items-center justify-center transform rotate-12 z-10`}
-                >
-                  <span className="text-3xl">{s.icon}</span>
-                </motion.div>
+        {/* Mission Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-violet-500 to-purple-600 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity" />
 
-                {/* Content Side */}
-                <div className={`${index % 2 === 1 ? 'lg:order-2' : ''} py-32`}>
-                  <motion.div
-                    className="relative"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className={`p-10`}>
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className={`flex-none w-10 h-10 rounded-full bg-gradient-to-br ${s.color} shadow-lg flex items-center justify-center`}>
-                          <span className="text-white font-bold text-lg">{s.step}</span>
-                        </div>
-                        <div className="flex-1 flex items-center">
-                          <h3 className={`text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${s.color}`}>
-                            {s.title}
-                          </h3>
-                        </div>
-                      </div>
-
-                      <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                        {s.summary}
-                      </p>
-
-                      <div className="space-y-3">
-                        {s.details.map((detail, i) => (
-                          <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.4 + i * 0.1 }}
-                            className="flex items-start gap-3 group"
-                          >
-                            <div className={`flex-none w-2 h-2 rounded-full bg-gradient-to-br ${s.color} mt-2 group-hover:scale-150 transition-transform`} />
-                            <p className="text-gray-600 leading-relaxed group-hover:text-gray-800 transition-colors">
-                              {detail}
-                            </p>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
+            <div className="relative bg-white rounded-3xl p-12 shadow-2xl border-2 border-purple-100">
+              <div className="flex items-start gap-6">
+                <div className="flex-none w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg flex items-center justify-center text-3xl">
+                  💡
                 </div>
-
-                {/* Slide Preview Side */}
-                <div className={`${index % 2 === 1 ? 'lg:order-1' : ''} h-full`}>
-                  <div className="relative group h-full">
-                    <div className="relative bg-white h-full">
-
-                      {/* Slide Preview */}
-                      <div className="relative group w-full h-full overflow-hidden">
-
-                        <img
-                          src={s.slidePreview}
-                          alt={`Slide ${s.step}`}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-lg" />
-
-                        {/* Overlay on hover */}
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          whileHover={{ opacity: 1 }}
-                          className="absolute inset-0 flex items-center justify-center"
-                        >
-                          <div className="text-center space-y-4">
-                            <motion.button
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
-                              className="py-3 px-6 rounded-xl bg-white border-2 border-purple-200 text-purple-600 font-semibold hover:border-purple-400 hover:bg-purple-50 transition-all flex items-center justify-center gap-2"
-                            >
-                              <span>⬇️</span>
-                              <span>Download</span>
-                            </motion.button>
-                          </div>
-                        </motion.div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-4">
+                    La Nostra Soluzione
+                  </h3>
+                  <p className="text-xl text-gray-700 leading-relaxed">
+                    Creare un <span className="font-bold text-purple-600">sistema digitale</span> che fornisca agli utenti ipovedenti
+                    degli strumenti per <span className="font-bold text-violet-600">raggruppare, trasformare e gestire</span> tutto
+                    il materiale didattico di studio, garantendo la <span className="font-bold text-purple-600">compatibilità</span> e
+                    un'<span className="font-bold text-violet-600">uniformità di formato</span>, con particolare attenzione al linguaggio matematico.
+                  </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </motion.div>
 
-              {/* Connecting Chain */}
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute left-1/2 -bottom-24 transform -translate-x-1/2 z-0">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                    className="flex flex-col items-center gap-1"
-                  >
-                    {[...Array(3)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ rotate: 0 }}
-                        animate={{ rotate: [0, 10, -10, 0] }}
-                        transition={{
-                          duration: 2,
-                          delay: i * 0.2,
-                          repeat: Infinity,
-                          repeatDelay: 1
-                        }}
-                      >
-                        <svg width="24" height="32" viewBox="0 0 24 32" fill="none">
-                          <ellipse cx="12" cy="8" rx="7" ry="6"
-                            className="fill-purple-300 stroke-purple-400 stroke-2" />
-                          <ellipse cx="12" cy="24" rx="7" ry="6"
-                            className="fill-violet-300 stroke-violet-400 stroke-2" />
-                          <rect x="10" y="8" width="4" height="16"
-                            className="fill-purple-200" />
-                        </svg>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </div>
-              )}
+        {/* Goals Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {goals.map((goal, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, type: "spring" }}
+              whileHover={{ y: -8 }}
+              className="group relative"
+            >
+              <div className={`absolute -inset-0.5 bg-gradient-to-r ${goal.color} rounded-2xl opacity-0 group-hover:opacity-100 blur transition-opacity`} />
+
+              <div className="relative h-full bg-white rounded-2xl p-8 shadow-xl border-2 border-purple-100 group-hover:border-transparent transition-all">
+                <motion.div
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                  className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${goal.color} shadow-lg mb-6`}
+                >
+                  <span className="text-3xl font-bold text-white">{goal.icon}</span>
+                </motion.div>
+
+                <h4 className="text-xl font-bold text-gray-800 mb-3">
+                  {goal.title}
+                </h4>
+
+                <p className="text-gray-600 leading-relaxed">
+                  {goal.desc}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
 
-        {/* Progress Indicator */}
+// ------ Team Section ------
+export function Team() {
+  return (
+    <section id="team" className="py-24 px-6 sm:px-12 lg:px-24 bg-gradient-to-b from-white to-[#F6EEFF]">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.8 }}
-          className="mt-16 text-center"
+          className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-lg">
-            {steps.map((s, i) => (
-              <React.Fragment key={s.step}>
+          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-6">
+            Team THESEUS
+          </h2>
+          <p className="text-xl text-gray-700">
+            Le persone che hanno reso possibile questo progetto
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {TEAM_MEMBERS.map((member, i) => (
+            <motion.div
+              key={member.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -10 }}
+              className="group"
+            >
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-violet-600 rounded-2xl opacity-20 group-hover:opacity-40 blur-xl transition-opacity" />
+
+                <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-purple-100">
+                  <div className="relative h-64 bg-gradient-to-br from-purple-200 to-violet-200 overflow-hidden">
+                    <motion.img
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.4 }}
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-violet-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+
+                  <div className="p-6 text-center">
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {member.name}
+                    </h3>
+                    <p className="text-purple-600 font-semibold">
+                      {member.role}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ------ Process Steps Section ------
+export function ProcessSteps() {
+  return (
+    <section id="steps" className="py-24 px-6 sm:px-12 lg:px-24 bg-gradient-to-br from-[#F6EEFF] to-white">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", duration: 0.8 }}
+            className="inline-block mb-6 px-8 py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-full text-lg font-bold shadow-xl"
+          >
+            Il Nostro Processo
+          </motion.div>
+
+          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-6">
+            Dal Concept alla Realizzazione
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Quattro fasi fondamentali per creare una soluzione accessibile e inclusiva
+          </p>
+        </motion.div>
+
+        <div className="space-y-24">
+          {PROCESS_STEPS.map((step, index) => (
+            <motion.div
+              key={step.step}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -60 : 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7 }}
+              className="relative group" // 👈 IL GRUPPO ORA È SU TUTTO LO STEP
+            >
+              <div className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+
+                {/* ---------------------- CONTENT ---------------------- */}
+                <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
+                  <motion.div
+                    initial={{ scale: 0.8, rotate: -10 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ type: "spring", duration: 0.8 }}
+                    className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br ${step.color} shadow-2xl mb-6 transform rotate-6`}
+                  >
+                    <span className="text-4xl">{step.icon}</span>
+                  </motion.div>
+
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className={`flex-none w-12 h-12 rounded-xl bg-gradient-to-br ${step.color} shadow-lg flex items-center justify-center`}>
+                      <span className="text-white font-bold text-xl">{step.step}</span>
+                    </div>
+                    <h3 className="text-3xl font-bold text-gray-800">
+                      {step.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-xl text-gray-700 leading-relaxed mb-8">
+                    {step.summary}
+                  </p>
+
+                  <div className="space-y-4">
+                    {step.details.map((detail, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 + i * 0.1 }}
+                        className="flex items-start gap-4 group"
+                      >
+                        <div className={`flex-none w-8 h-8 rounded-lg bg-gradient-to-br ${step.color} shadow-md flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                          <span className="text-white font-bold text-sm">✓</span>
+                        </div>
+                        <p className="text-gray-600 leading-relaxed flex-1 group-hover:text-gray-800 transition-colors">
+                          {detail}
+                        </p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* ---------------------- SLIDE PREVIEW ---------------------- */}
+                <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
+                  <motion.div
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    whileHover={{ scale: 1.02 }}
+                    className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-purple-200"
+                  >
+                    {/* Glow background */}
+                    <div className={`absolute -inset-4 bg-gradient-to-r ${step.color} rounded-3xl opacity-20 blur-2xl`} />
+
+                    <div className={`relative rounded-3xl overflow-hidden ${step.bgColor}`}>
+                      <div className="relative w-full h-full">
+
+                        {/* Preview image */}
+                        <img
+                          src={step.slidePreview}
+                          alt={`Slide ${step.step}`}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" // 👈 TRIGGER SULLA GROUP DI TUTTO LO STEP
+                        />
+
+                        {/* Gradient hover overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm" />
+
+                        {/* Download button (animated) */}
+                        <motion.div
+                          
+                          className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        >
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="py-3 px-6 rounded-xl bg-white border-2 border-purple-200 text-purple-600 font-semibold hover:border-purple-400 hover:bg-purple-50 transition-all flex items-center justify-center gap-2"
+                          >
+                            <span>⬇️</span>
+                            <span>Download</span>
+                          </motion.button>
+                        </motion.div>
+
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* ---------------------- CONNECTOR LINE ---------------------- */}
+              {index < PROCESS_STEPS.length - 1 && (
                 <motion.div
-                  whileHover={{ scale: 1.3 }}
-                  className={`w-3 h-3 rounded-full transition-all ${hoveredStep === s.step
-                    ? `bg-gradient-to-r ${s.color} scale-125`
-                    : 'bg-purple-200'
-                    }`}
+                  initial={{ opacity: 0, scaleY: 0 }}
+                  whileInView={{ opacity: 1, scaleY: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                  className="hidden lg:block absolute left-1/2 -bottom-12 transform -translate-x-1/2"
+                >
+                  <div className="flex flex-col items-center gap-2">
+                    <div className={`w-1 h-8 bg-gradient-to-b ${step.color} rounded-full`} />
+                    <motion.div
+                      animate={{ y: [0, 10, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                      className={`w-4 h-4 rounded-full bg-gradient-to-br ${step.color}`}
+                    />
+                  </div>
+                </motion.div>
+              )}
+            </motion.div>
+          ))}
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ------ Features Section ------
+const features = [
+  {
+    icon: "📁",
+    title: "Gestione Risorse",
+    description: "Esplora risorse in modo rapido con suddivisione per cartelle, crea gerarchie personalizzate e mantieni tutto organizzato.",
+    shortcut: "E",
+    color: "from-purple-500 to-violet-600"
+  },
+  {
+    icon: "🔄",
+    title: "Conversione File",
+    description: "Converti qualsiasi file in formato accessibile, compatibile con screen reader e ottimizzato per la lettura.",
+    shortcut: "C",
+    color: "from-violet-500 to-purple-600"
+  },
+  {
+    icon: "🔍",
+    title: "Analisi Contenuti",
+    description: "Analizza i tuoi file, fai domande sul contenuto e ricevi assistenza per comprendere testi complessi.",
+    shortcut: "A",
+    color: "from-purple-600 to-violet-500"
+  },
+  {
+    icon: "🎤",
+    title: "Assistente Vocale",
+    description: "Sempre disponibile per ogni funzione, attivabile con la spacebar o comandi personalizzabili.",
+    shortcut: "Space",
+    color: "from-violet-600 to-purple-500"
+  },
+  {
+    icon: "🔎",
+    title: "Ricerca Avanzata",
+    description: "Cerca i tuoi file per nome, filtri o categorie. Include cronologia ricerche e accesso rapido ai preferiti.",
+    shortcut: "S",
+    color: "from-purple-500 to-violet-600"
+  },
+  {
+    icon: "⭐",
+    title: "File Preferiti",
+    description: "Accesso immediato ai documenti più utilizzati con sistema di stelle e cronologia intelligente.",
+    shortcut: "F",
+    color: "from-violet-500 to-purple-600"
+  }
+];
+export function Features() {
+  const containerRef = useRef(null);
+  const autoScrollRef = useRef(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // step in pixels (puoi regolarlo)
+    const STEP = Math.round(container.clientWidth * 0.6); // scrolla ~60% della view per step
+    const DELAY = 3000; // ms fra gli step
+
+    function startAutoScroll() {
+      if (autoScrollRef.current) return;
+      autoScrollRef.current = setInterval(() => {
+        // se siamo quasi alla fine, torna all'inizio (loop)
+        if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
+          container.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          container.scrollBy({ left: STEP, behavior: "smooth" });
+        }
+      }, DELAY);
+    }
+
+    function stopAutoScroll() {
+      if (!autoScrollRef.current) return;
+      clearInterval(autoScrollRef.current);
+      autoScrollRef.current = null;
+    }
+
+    // avvia
+    startAutoScroll();
+
+    // pausa su interazione touch/drag/hover
+    container.addEventListener("mouseenter", stopAutoScroll);
+    container.addEventListener("mouseleave", startAutoScroll);
+    container.addEventListener("touchstart", stopAutoScroll, { passive: true });
+    container.addEventListener("touchend", startAutoScroll, { passive: true });
+
+    // cleanup
+    return () => {
+      stopAutoScroll();
+      container.removeEventListener("mouseenter", stopAutoScroll);
+      container.removeEventListener("mouseleave", startAutoScroll);
+      container.removeEventListener("touchstart", stopAutoScroll);
+      container.removeEventListener("touchend", startAutoScroll);
+    };
+  }, []);
+
+  return (
+    <section className="py-24 px-6 sm:px-12 lg:px-24 bg-gradient-to-b from-white to-[#F6EEFF]">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-6">
+            Funzionalità Principali
+          </h2>
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            Un'interfaccia semplice e intuitiva con bottoni grandi e funzioni complete,
+            tutte accessibili tramite shortcut e assistente vocale
+          </p>
+        </motion.div>
+
+        {/* container orizzontale con snap */}
+        <div
+          id="features-scroll"
+          ref={containerRef}
+          className="flex gap-8 overflow-x-auto overflow-y-hidden snap-x snap-mandatory px-4 py-8 -my-8 scrollbar-hide items-stretch"
+        >
+          {features.map((feature, i) => (
+            // wrapper esterno: snap-start, larghezza responsiva e non si restringe
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative snap-start flex-shrink-0 w-[300px] sm:w-[340px] md:w-[420px] lg:w-[360px] flex"
+            >
+              <div className={`absolute -inset-1 bg-gradient-to-r ${feature.color} rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity`} />
+
+              {/* la card interna è flex-col e flex-1 per mantenere altezza uguale */}
+              <div className="relative flex-1 flex flex-col bg-white rounded-2xl p-8 shadow-xl border-2 border-purple-100 group-hover:border-transparent transition-all">
+                <motion.div
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  transition={{ duration: 0.6 }}
+                  className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br ${feature.color} shadow-lg mb-6`}
+                >
+                  <span className="text-4xl">{feature.icon}</span>
+                </motion.div>
+
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-2xl font-bold text-gray-800">
+                    {feature.title}
+                  </h3>
+                  <div className={`px-3 py-1 rounded-lg bg-gradient-to-r ${feature.color} text-white text-sm font-bold shadow-md`}>
+                    {feature.shortcut}
+                  </div>
+                </div>
+
+                <p className="text-gray-600 leading-relaxed flex-1">
+                  {feature.description}
+                </p>
+
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "100%" }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 + i * 0.1, duration: 0.6 }}
+                  className={`h-1 mt-6 rounded-full bg-gradient-to-r ${feature.color}`}
                 />
-                {i < steps.length - 1 && (
-                  <div className="w-8 h-0.5 bg-purple-200" />
-                )}
-              </React.Fragment>
-            ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ------ Strengths & Weaknesses Section ------
+export function Analysis() {
+  const strengths = [
+    "Assistente vocale alla base del sistema di interazione",
+    "Hub centrale che abilita altri software di supporto",
+    "Modalità di gestione file analoga a software già noti",
+    "Supporto completo per screen reader su desktop",
+    "Gestione file diretta e stabile"
+  ];
+
+  const weaknesses = [
+    "Standardizzazione dei formati complessa da realizzare",
+    "Necessità di un assistente vocale fluente e avanzato",
+    "Centralizzazione eccessiva potrebbe mettere a rischio i dati"
+  ];
+
+  return (
+    <section className="py-24 px-6 sm:px-12 lg:px-24 bg-gradient-to-br from-[#F6EEFF] to-white">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-6">
+            Analisi della Soluzione
+          </h2>
+          <p className="text-xl text-gray-700">
+            Valutazione obiettiva dei punti di forza e delle sfide da affrontare
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Strengths */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative h-full">
+              <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-3xl opacity-20 blur-xl" />
+
+              <div className="relative h-full bg-white rounded-3xl p-8 shadow-2xl border-2 border-green-100">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg flex items-center justify-center">
+                    <span className="text-3xl">✓</span>
+                  </div>
+                  <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">
+                    Punti di Forza
+                  </h3>
+                </div>
+
+                <div className="space-y-4">
+                  {strengths.map((strength, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 * i }}
+                      className="flex items-start gap-4 group"
+                    >
+                      <div className="flex-none w-6 h-6 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 shadow-md flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                        <span className="text-white text-sm font-bold">+</span>
+                      </div>
+                      <p className="text-gray-700 leading-relaxed flex-1">
+                        {strength}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Weaknesses */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative h-full">
+              <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-red-600 rounded-3xl opacity-20 blur-xl" />
+
+              <div className="relative h-full bg-white rounded-3xl p-8 shadow-2xl border-2 border-orange-100">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 shadow-lg flex items-center justify-center">
+                    <span className="text-3xl">⚠</span>
+                  </div>
+                  <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-600">
+                    Punti di Debolezza
+                  </h3>
+                </div>
+
+                <div className="space-y-4">
+                  {weaknesses.map((weakness, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 * i }}
+                      className="flex items-start gap-4 group"
+                    >
+                      <div className="flex-none w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-red-500 shadow-md flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                        <span className="text-white text-sm font-bold">!</span>
+                      </div>
+                      <p className="text-gray-700 leading-relaxed flex-1">
+                        {weakness}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Desktop Choice Explanation */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12"
+        >
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-violet-600 rounded-3xl opacity-30 blur-xl" />
+
+            <div className="relative bg-white rounded-3xl p-10 shadow-2xl border-2 border-purple-100">
+              <div className="flex items-start gap-6">
+                <div className="flex-none w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg flex items-center justify-center">
+                  <span className="text-3xl">💻</span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-4">
+                    Perché Desktop?
+                  </h3>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    Il team ha scelto l'<span className="font-bold text-purple-600">app desktop</span> perché il progetto
+                    nasceva per supportare lo studio dei non vedenti, e il desktop è l'ambiente più adatto. Gli
+                    <span className="font-bold text-violet-600"> screen reader sono più completi</span>, la gestione dei
+                    file è diretta e stabile, e l'interazione con documenti e strumenti di studio risulta molto più fluida
+                    rispetto al mobile.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -770,84 +921,59 @@ export function ProcessSteps({ steps = PROCESS_STEPS }) {
   );
 }
 
-export function CTA({ ctaText = "Richiedi Demo", onClick }) {
-  return (
-    <section className="py-12 px-6 sm:px-12 lg:px-24 bg-gradient-to-r from-[#F6EEFF] to-white">
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-6">
-        <div>
-          <h3 className="text-xl font-bold">Vuoi provare la piattaforma?</h3>
-          <p className="mt-2 text-gray-600">Richiedi una demo per il tuo istituto o gruppo di supporto.</p>
-        </div>
-        <div>
-          <button
-            onClick={onClick}
-            className="px-6 py-3 rounded-full bg-violet-700 text-white font-semibold shadow hover:scale-105 transform transition"
-          >
-            {ctaText}
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
+// ------ Footer ------
 export function Footer() {
   return (
-    <footer className="py-8 px-6 sm:px-12 lg:px-24 bg-white">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="text-sm text-gray-600">© {new Date().getFullYear()} Progetto Accessibilità - Tutti i diritti riservati.</div>
-        <div className="flex items-center gap-4">
-          <a href="#" className="text-sm text-violet-700">Privacy</a>
-          <a href="#" className="text-sm text-violet-700">Contatti</a>
+    <footer className="py-12 px-6 sm:px-12 lg:px-24 bg-gradient-to-br from-purple-900 to-violet-900 text-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 mb-8">
+          <div>
+            <h3 className="text-2xl font-bold mb-4">Inklusion</h3>
+            <p className="text-purple-200">
+              L'inclusione è il nostro formato. Rendere lo studio accessibile a tutti.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-bold mb-4">Team THESEUS</h4>
+            <p className="text-purple-200 text-sm">
+              Alessio Brambilla, Davide Celia, Dennis Ferrari, Denise Luzzi, Alessio Antonucci, Emanuele Parinetti
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-bold mb-4">Progetto</h4>
+            <p className="text-purple-200 text-sm">
+              FHCI - Fondamenti di Human-Computer Interaction<br />
+              Consegna 3: Task, Storyboard e Primi Prototipi
+            </p>
+          </div>
+        </div>
+
+        <div className="border-t border-purple-700 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-purple-300 text-sm">
+            © {new Date().getFullYear()} Team THESEUS - Tutti i diritti riservati
+          </p>
+          <p className="text-purple-300 text-sm">
+            "Studiare è un diritto di tutti e aiutare chi è in difficoltà è il nostro scopo"
+          </p>
         </div>
       </div>
     </footer>
   );
 }
 
-// ------ Default export: assembled page component ------
-export default function ProjectShowcasePage({
-  team = TEAM,
-  steps = PROCESS_STEPS,
-  mission =
-  "Sviluppare una piattaforma educativa accessibile che permetta a persone con disabilità visive di studiare in autonomia usando interfacce audio-first, testi strutturati e percorsi adattivi.",
-  goals = [
-    { title: "Accessibilità reale", desc: "Implementare pattern che funzionino con screen reader e input vocale." },
-    { title: "Apprendimento adattivo", desc: "Percorsi che si adattano allo stile di apprendimento e ritmo dell'utente." },
-    { title: "Coinvolgimento sociale", desc: "Strumenti per insegnanti e caregiver per supportare il processo educativo." },
-    { title: "Scalabilità tecnica", desc: "Architettura solida per gestire contenuti e integrazioni TTS custom." },
-  ],
-}) {
-  function handleCta() {
-    // placeholder - integrate analytics or navigation
-    alert("Grazie! Richiedi una demo via contatto.");
-  }
-
+// ------ Main Component ------
+export default function InklusionShowcase() {
   return (
-    <main className="min-h-screen font-sans text-gray-800 bg-gradient-to-b from-white to-[#FBF8FF]">
-      <Hero
-        title={"Piattaforma di studio accessibile"}
-        subtitle={"Audio-first, semplice, pensata per persone con disabilità visive"}
-        onCta={handleCta}
-      />
-
-      <Overview mission={mission} goals={goals} />
-
-      <Team members={team} />
-
-      <ProcessSteps steps={steps} />
-
-      {false && <CTA onClick={handleCta} />}
-
+    <main className="min-h-screen font-sans bg-white overflow-x-hidden">
+      <Hero />
+      <MissionGoals />
+      <Features />
+      <Team />
+      <ProcessSteps />
+      <Analysis />
       <Footer />
     </main>
   );
 }
-
-// ------------------
-// How to use:
-// - Drop this file into your Next.js `components/` or `pages/` folder
-// - Ensure TailwindCSS is configured and framer-motion is installed
-// - All arrays (TEAM, PROCESS_STEPS) are exported at the top for easy modification
-// - Each small section is a named export for reuse in other pages
-// ------------------
