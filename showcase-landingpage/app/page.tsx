@@ -11,37 +11,37 @@ const TEAM_MEMBERS = [
     id: 1,
     name: "Alessio Brambilla",
     role: "Team Lead & Research",
-    image: "/imgs/ale b.ppm"
+    image: "/imgs/ale b.jpeg"
   },
   {
     id: 2,
     name: "Davide Celia",
     role: "UX Designer",
-    image: "/imgs/davide.ppm"
+    image: "/imgs/davide.jpeg"
   },
   {
     id: 3,
     name: "Dennis Ferrari",
     role: "Developer",
-    image: "/imgs/dennis.ppm"
+    image: "/imgs/dennis.jpeg"
   },
   {
     id: 4,
     name: "Denise Luzzi",
     role: "Accessibility Specialist",
-    image: "/imgs/denise.ppm"
+    image: "/imgs/denise.jpeg"
   },
   {
     id: 5,
     name: "Alessio Antonucci",
     role: "Product Manager",
-    image: "/imgs/ale a.ppm"
+    image: "/imgs/ale a.jpeg"
   },
   {
     id: 6,
     name: "Emanuele Parinetti",
     role: "System Architect",
-    image: "/imgs/emanuele.ppm"
+    image: "/imgs/emanuele.jpeg"
   }
 ];
 
