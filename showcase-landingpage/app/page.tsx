@@ -11,37 +11,37 @@ const TEAM_MEMBERS = [
     id: 1,
     name: "Alessio Brambilla",
     role: "Team Lead & Research",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alessio1&backgroundColor=c084fc"
+    image: "/imgs/ale b.ppm"
   },
   {
     id: 2,
     name: "Davide Celia",
     role: "UX Designer",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Davide&backgroundColor=a855f7"
+    image: "/imgs/davide.ppm"
   },
   {
     id: 3,
     name: "Dennis Ferrari",
     role: "Developer",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Dennis&backgroundColor=c084fc"
+    image: "/imgs/dennis.ppm"
   },
   {
     id: 4,
     name: "Denise Luzzi",
     role: "Accessibility Specialist",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Denise&backgroundColor=7c3aed"
+    image: "/imgs/denise.ppm"
   },
   {
     id: 5,
     name: "Alessio Antonucci",
     role: "Product Manager",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alessio2&backgroundColor=a855f7"
+    image: "/imgs/ale a.ppm"
   },
   {
     id: 6,
     name: "Emanuele Parinetti",
     role: "System Architect",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emanuele&backgroundColor=c084fc"
+    image: "/imgs/emanuele.ppm"
   }
 ];
 
@@ -420,9 +420,11 @@ export function Team() {
                     <h3 className="text-xl font-bold text-gray-800 mb-2">
                       {member.name}
                     </h3>
-                    <p className="text-purple-600 font-semibold">
+                    {true 
+                    ? <div className="bg-purple-600 max-w-16 h-1 rounded-full mx-auto mt-2" />
+                    : <p className="text-purple-600 font-semibold">
                       {member.role}
-                    </p>
+                    </p>}
                   </div>
                 </div>
               </div>
