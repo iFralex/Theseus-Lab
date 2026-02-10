@@ -41,7 +41,7 @@ const TEAM_MEMBERS = [
     id: 6,
     name: "Emanuele Parinetti",
     role: "System Architect",
-    image: "/imgs/emanuele.jpeg"
+    image: "/imgs/ema.jpeg"
   }
 ];
 
@@ -49,60 +49,79 @@ const TEAM_MEMBERS = [
 const PROCESS_STEPS = [
   {
     step: 1,
-    title: "Individuazione dei Task",
-    summary: "Analisi approfondita degli scenari d'uso e identificazione dei task fondamentali per gli utenti ipovedenti nel contesto dello studio universitario.",
+    title: "Individuazione dei Bisogni",
+    summary: "Fase iniziale di ricerca per comprendere le necessità degli utenti ipovedenti nel contesto universitario.",
     details: [
-      "Studio del contesto: casa, università, luoghi con connessione internet",
-      "Identificazione di task semplici, moderati e complessi",
-      "Analisi delle necessità di Pietro, Angelo e Gloria (utenti tipo)"
+      "Selezione di utenti target (studenti ipovedenti), estremi ed esperti di dominio [1, 2].",
+      "Conduzione di interviste strutturate divise in domande generali, inerenti al tema e di opinione [3, 4].",
+      "Analisi dei risultati preliminari riguardanti la mobilità nel campus e l'accessibilità digitale [5, 6]."
     ],
     icon: "🔍",
-    color: "from-purple-500 to-violet-600",
-    bgColor: "bg-purple-50",
-    slidePreview: "/imgs/c1.png"
+    color: "from-blue-500 to-cyan-600",
+    bgColor: "bg-blue-50",
+    slidePreview: "/imgs/c1.png",
+    slideDownload: "/files/c1.pdf",
   },
   {
     step: 2,
-    title: "Storyboard e Progettazione",
-    summary: "Creazione di storyboard dettagliati e definizione dell'architettura del sistema per garantire un'esperienza fluida e accessibile.",
+    title: "Raffinamento e Focus",
+    summary: "Cambio di prospettiva basato sulle testimonianze degli utenti, passando dalla mobilità all'accessibilità didattica.",
     details: [
-      "Storyboard per ricerca documenti e lettura assistita",
-      "Progettazione interfaccia vocale e grafica semplificata",
-      "Definizione dei flussi di interazione principali"
+      "Individuazione della criticità legata all'accesso ai testi scolastici e formule matematiche [7].",
+      "Sessioni di brainstorming per definire la Value Proposition: 'L’inclusione è il nostro formato' [8, 9].",
+      "Riconsiderazione dei bisogni finali: intercompatibilità software e uniformità dei testi digitali [10, 11]."
     ],
-    icon: "✏️",
-    color: "from-violet-500 to-purple-600",
-    bgColor: "bg-violet-50",
-    slidePreview: "/imgs/c2.png"
+    icon: "💡",
+    color: "from-amber-400 to-orange-500",
+    bgColor: "bg-amber-50",
+    slidePreview: "/imgs/c2.png",
+    slideDownload: "/files/c2.pdf",
   },
   {
     step: 3,
-    title: "Prototyping Desktop e Mobile",
-    summary: "Sviluppo di prototipi funzionali per entrambe le piattaforme, con focus particolare sulla versione desktop per l'ambiente di studio ottimale.",
+    title: "Task, Storyboard e Primi Prototipi",
+    summary: "Analisi dei compiti degli utenti e visualizzazione degli scenari d'uso tramite storyboard.",
     details: [
-      "Prototipo desktop con workflow fluido e schermi ampi",
-      "Prototipo mobile per uso dinamico e in mobilità",
-      "Test di usabilità con utenti target"
+      "Definizione dei task (semplice, moderato, complesso) con analisi HTA [12-14].",
+      "Creazione di storyboard per illustrare la ricerca documenti e la lettura assistita [15].",
+      "Confronto tra soluzioni Mobile e Desktop, con scelta finale della versione Desktop per solidità tecnica [16, 17]."
     ],
-    icon: "⚙️",
-    color: "from-purple-600 to-violet-500",
+    icon: "📝",
+    color: "from-purple-500 to-indigo-600",
     bgColor: "bg-purple-50",
-    slidePreview: "/imgs/c3.png"
+    slidePreview: "/imgs/c3.png",
+    slideDownload: "/files/c3.pdf",
   },
   {
     step: 4,
-    title: "Validazione e Scelta Finale",
-    summary: "Valutazione comparativa delle soluzioni e scelta della piattaforma desktop come ambiente principale per garantire la migliore esperienza di studio.",
+    title: "Sviluppo e Raffinamento del Prototipo",
+    summary: "Progettazione di un'interfaccia interattiva ad alta fedeltà focalizzata sull'assistente vocale.",
     details: [
-      "Analisi punti di forza: assistente vocale, hub centrale, gestione file",
-      "Valutazione punti di debolezza e soluzioni proposte",
-      "Scelta desktop per supporto screen reader completo e gestione file stabile"
+      "Design di una Home Page intuitiva con pulsanti larghi e contrasto elevato [18].",
+      "Implementazione di shortcut da tastiera per ogni funzione principale (Esplora, Converti, Analisi) [18, 19].",
+      "Integrazione di un assistente vocale interattivo per la gestione assistita dei file .ink [20, 21]."
     ],
-    icon: "🚀",
-    color: "from-violet-600 to-purple-500",
-    bgColor: "bg-violet-50",
-    slidePreview: "/imgs/c4.png"
+    icon: "💻",
+    color: "from-emerald-500 to-teal-600",
+    bgColor: "bg-emerald-50",
+    slidePreview: "/imgs/c4.png",
+    slideDownload: "/files/c4.pdf",
   },
+  {
+    step: 5,
+    title: "Valutazione Euristica di StudiaMi",
+    summary: "Test del prototipo del progetto mid-fidelity del team StudiaMi per identificare criticità di usabilità basate sulle euristiche di Nielsen.",
+    details: [
+      "Individuazione di violazioni riguardanti la consistenza (H4) e il controllo utente (H3) [22, 23].",
+      "Analisi dei problemi specifici come il feedback mancante nell'iscrizione ai gruppi studio [24, 25].",
+      "Stesura di raccomandazioni per migliorare la prevenzione degli errori e la visibilità dello stato [26, 27]."
+    ],
+    icon: "✅",
+    color: "from-rose-500 to-red-600",
+    bgColor: "bg-rose-50",
+    slidePreview: "/imgs/c5.png",
+    slideDownload: "/files/c5.pdf",
+  }
 ];
 
 // ------ Hero Section ------
@@ -409,9 +428,10 @@ export function Team() {
                     <motion.img
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.4 }}
-                      src={member.image}
+                      src={"/Theseus-Lab" + member.image}
                       alt={member.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover grayscale
+      group-hover:grayscale-0 transition-all duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-violet-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
@@ -420,11 +440,11 @@ export function Team() {
                     <h3 className="text-xl font-bold text-gray-800 mb-2">
                       {member.name}
                     </h3>
-                    {true 
-                    ? <div className="bg-purple-600 max-w-16 h-1 rounded-full mx-auto mt-2" />
-                    : <p className="text-purple-600 font-semibold">
-                      {member.role}
-                    </p>}
+                    {true
+                      ? <div className="bg-purple-600 max-w-16 h-1 rounded-full mx-auto mt-2" />
+                      : <p className="text-purple-600 font-semibold">
+                        {member.role}
+                      </p>}
                   </div>
                 </div>
               </div>
@@ -541,7 +561,7 @@ export function ProcessSteps() {
 
                         {/* Preview image */}
                         <img
-                          src={step.slidePreview}
+                          src={"/Theseus-Lab" + step.slidePreview}
                           alt={`Slide ${step.step}`}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" // 👈 TRIGGER SULLA GROUP DI TUTTO LO STEP
                         />
@@ -551,19 +571,19 @@ export function ProcessSteps() {
 
                         {/* Download button (animated) */}
                         <motion.div
-                          
                           className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         >
-                          <motion.button
+                          <motion.a
+                            href={"/Theseus-Lab" + step.slideDownload}
+                            download
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="py-3 px-6 rounded-xl bg-white border-2 border-purple-200 text-purple-600 font-semibold hover:border-purple-400 hover:bg-purple-50 transition-all flex items-center justify-center gap-2"
                           >
                             <span>⬇️</span>
                             <span>Download</span>
-                          </motion.button>
+                          </motion.a>
                         </motion.div>
-
                       </div>
                     </div>
                   </motion.div>
@@ -897,7 +917,7 @@ export function Analysis() {
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-violet-600 rounded-3xl opacity-30 blur-xl" />
 
-            <div className="relative bg-white rounded-3xl p-10 shadow-2xl border-2 border-purple-100">
+            {false && <div className="relative bg-white rounded-3xl p-10 shadow-2xl border-2 border-purple-100">
               <div className="flex items-start gap-6">
                 <div className="flex-none w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg flex items-center justify-center">
                   <span className="text-3xl">💻</span>
@@ -915,7 +935,7 @@ export function Analysis() {
                   </p>
                 </div>
               </div>
-            </div>
+            </div>}
           </div>
         </motion.div>
       </div>
@@ -947,7 +967,6 @@ export function Footer() {
             <h4 className="font-bold mb-4">Progetto</h4>
             <p className="text-purple-200 text-sm">
               FHCI - Fondamenti di Human-Computer Interaction<br />
-              Consegna 3: Task, Storyboard e Primi Prototipi
             </p>
           </div>
         </div>
