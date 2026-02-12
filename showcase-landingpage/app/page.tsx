@@ -87,7 +87,7 @@ const PROCESS_STEPS = [
       "Confronto tra soluzioni Mobile e Desktop, con scelta finale della versione Desktop per solidità tecnica."
     ],
     icon: "📝",
-    color: "from-purple-500 to-indigo-600",
+    color: "from-purple-800 to-indigo-600",
     bgColor: "bg-purple-50",
     slidePreview: "/imgs/c3.png",
     slideDownload: "/files/c3.pdf",
@@ -148,13 +148,13 @@ export function Hero() {
                 transition={{ delay: 0.2, duration: 0.6 }}
                 className="inline-block mb-6"
               >
-                <div className="px-6 py-2 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-full text-sm font-bold shadow-lg">
+                <div className="px-6 py-2 bg-gradient-to-r from-purple-800 to-violet-600 text-white rounded-full text-sm font-bold shadow-lg">
                   Team THESEUS
                 </div>
               </motion.div>
 
               <h1 className="text-6xl sm:text-7xl font-black leading-tight mb-6">
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-violet-600 to-purple-700">
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-900 via-violet-600 to-purple-700">
                   Inklusion
                 </span>
               </h1>
@@ -174,7 +174,7 @@ export function Hero() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="#steps"
-                  className="px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-violet-600 text-white font-bold text-lg shadow-2xl hover:shadow-purple-500/50 transition-all"
+                  className="px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-900 to-violet-600 text-white font-bold text-lg shadow-2xl hover:shadow-purple-800/50 transition-all"
                 >
                   Scopri il Progetto
                 </motion.a>
@@ -219,7 +219,7 @@ export function Hero() {
                           transition={{ delay: 0.8 + i * 0.1 }}
                           className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-purple-50 to-violet-50"
                         >
-                          <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-violet-600" />
+                          <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-800 to-violet-600" />
                           <span className="text-gray-700 font-medium">{text}</span>
                         </motion.div>
                       ))}
@@ -233,7 +233,7 @@ export function Hero() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => window.open("https://www.figma.com/design/xZXA8SyWoVP4Lmv6xkZMnz/Inklusion---prototipi?node-id=0-1&p=f&t=YUp0cqwYZc2GqC9d-0", "_blank")}
-                        className="px-6 py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                        className="px-6 py-3 bg-gradient-to-r from-purple-800 to-violet-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                       >
                         Vedi Figma
                       </motion.button>
@@ -241,7 +241,7 @@ export function Hero() {
                   </div>
 
                   {/* Corner Accent */}
-                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-violet-400 to-purple-600 rounded-2xl rotate-12 shadow-xl flex items-center justify-center text-4xl">
+                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-violet-400 to-purple-900 rounded-2xl rotate-12 shadow-xl flex items-center justify-center text-4xl">
                     💜
                   </div>
                 </div>
@@ -255,7 +255,7 @@ export function Hero() {
                 <motion.div
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 2.5, repeat: Infinity }}
-                  className="absolute -bottom-4 -right-4 w-20 h-20 bg-gradient-to-br from-violet-400 to-purple-500 rounded-full shadow-lg"
+                  className="absolute -bottom-4 -right-4 w-20 h-20 bg-gradient-to-br from-violet-400 to-purple-800 rounded-full shadow-lg"
                 />
               </div>
             </motion.div>
@@ -273,25 +273,25 @@ export function MissionGoals() {
       title: "Compatibilità Universale",
       desc: "Convertire e standardizzare tutti i formati di file per renderli leggibili dai software di screen-reading.",
       icon: "🔄",
-      color: "from-purple-500 to-violet-600"
+      color: "from-purple-800 to-violet-600"
     },
     {
       title: "Linguaggio Matematico",
       desc: "Supporto completo per formule e simboli matematici, spesso incompatibili con i lettori standard.",
       icon: "∑",
-      color: "from-violet-500 to-purple-600"
+      color: "from-violet-500 to-purple-900"
     },
     {
       title: "Gestione Centralizzata",
       desc: "Hub unico per raggruppare, organizzare e gestire tutto il materiale didattico in modo gerarchico.",
       icon: "📚",
-      color: "from-purple-600 to-violet-500"
+      color: "from-purple-900 to-violet-500"
     },
     {
       title: "Assistenza Vocale",
       desc: "Interfaccia vocale completa per ogni funzione, accessibile con comandi naturali e shortcut personalizzabili.",
       icon: "🎤",
-      color: "from-violet-600 to-purple-500"
+      color: "from-violet-600 to-purple-800"
     },
   ];
 
@@ -313,14 +313,14 @@ export function MissionGoals() {
             className="inline-block mb-6"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-violet-600 rounded-3xl blur-xl opacity-50" />
-              <div className="relative w-24 h-24 rounded-3xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-2xl flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-800 to-violet-600 rounded-3xl blur-xl opacity-50" />
+              <div className="relative w-24 h-24 rounded-3xl bg-gradient-to-br from-purple-800 to-violet-600 shadow-2xl flex items-center justify-center">
                 <span className="text-5xl">🎯</span>
               </div>
             </div>
           </motion.div>
 
-          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-6">
+          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-violet-600 mb-6">
             Il Nostro Obiettivo
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -336,21 +336,21 @@ export function MissionGoals() {
           className="mb-20"
         >
           <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-violet-500 to-purple-600 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-800 via-violet-500 to-purple-900 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity" />
 
             <div className="relative bg-white rounded-3xl p-12 shadow-2xl border-2 border-purple-100">
               <div className="flex items-start gap-6">
-                <div className="flex-none w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg flex items-center justify-center text-3xl">
+                <div className="flex-none w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-800 to-violet-600 shadow-lg flex items-center justify-center text-3xl">
                   💡
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-4">
+                  <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-violet-600 mb-4">
                     La Nostra Soluzione
                   </h3>
                   <p className="text-xl text-gray-700 leading-relaxed">
-                    Creare un <span className="font-bold text-purple-600">sistema digitale</span> che fornisca agli utenti ipovedenti
+                    Creare un <span className="font-bold text-purple-900">sistema digitale</span> che fornisca agli utenti ipovedenti
                     degli strumenti per <span className="font-bold text-violet-600">raggruppare, trasformare e gestire</span> tutto
-                    il materiale didattico di studio, garantendo la <span className="font-bold text-purple-600">compatibilità</span> e
+                    il materiale didattico di studio, garantendo la <span className="font-bold text-purple-900">compatibilità</span> e
                     un'<span className="font-bold text-violet-600">uniformità di formato</span>, con particolare attenzione al linguaggio matematico.
                   </p>
                 </div>
@@ -409,7 +409,7 @@ export function Team() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-6">
+          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-violet-600 mb-6">
             Team THESEUS
           </h2>
           <p className="text-xl text-gray-700">
@@ -429,7 +429,7 @@ export function Team() {
               className="group"
             >
               <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-violet-600 rounded-2xl opacity-20 group-hover:opacity-40 blur-xl transition-opacity" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-800 to-violet-600 rounded-2xl opacity-20 group-hover:opacity-40 blur-xl transition-opacity" />
 
                 <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-purple-100">
                   <div className="relative h-64 bg-gradient-to-br from-purple-200 to-violet-200 overflow-hidden">
@@ -448,8 +448,8 @@ export function Team() {
                       {member.name}
                     </h3>
                     {true
-                      ? <div className="bg-purple-600 max-w-16 h-1 rounded-full mx-auto mt-2" />
-                      : <p className="text-purple-600 font-semibold">
+                      ? <div className="bg-purple-900 max-w-16 h-1 rounded-full mx-auto mt-2" />
+                      : <p className="text-purple-900 font-semibold">
                         {member.role}
                       </p>}
                   </div>
@@ -479,12 +479,12 @@ export function ProcessSteps() {
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", duration: 0.8 }}
-            className="inline-block mb-6 px-8 py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-full text-lg font-bold shadow-xl"
+            className="inline-block mb-6 px-8 py-3 bg-gradient-to-r from-purple-800 to-violet-600 text-white rounded-full text-lg font-bold shadow-xl"
           >
             Il Nostro Processo
           </motion.div>
 
-          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-6">
+          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-violet-600 mb-6">
             Dal Concept alla Realizzazione
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -585,7 +585,7 @@ export function ProcessSteps() {
                             download
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="py-3 px-6 rounded-xl bg-white border-2 border-purple-200 text-purple-600 font-semibold hover:border-purple-400 hover:bg-purple-50 transition-all flex items-center justify-center gap-2"
+                            className="py-3 px-6 rounded-xl bg-white border-2 border-purple-200 text-purple-900 font-semibold hover:border-purple-400 hover:bg-purple-50 transition-all flex items-center justify-center gap-2"
                           >
                             <span>⬇️</span>
                             <span>Download</span>
@@ -632,42 +632,42 @@ const features = [
     title: "Gestione Risorse",
     description: "Esplora risorse in modo rapido con suddivisione per cartelle, crea gerarchie personalizzate e mantieni tutto organizzato.",
     shortcut: "E",
-    color: "from-purple-500 to-violet-600"
+    color: "from-purple-800 to-violet-600"
   },
   {
     icon: "🔄",
     title: "Conversione File",
     description: "Converti qualsiasi file in formato accessibile, compatibile con screen reader e ottimizzato per la lettura.",
     shortcut: "C",
-    color: "from-violet-500 to-purple-600"
+    color: "from-violet-500 to-purple-900"
   },
   {
     icon: "🔍",
     title: "Analisi Contenuti",
     description: "Analizza i tuoi file, fai domande sul contenuto e ricevi assistenza per comprendere testi complessi.",
     shortcut: "A",
-    color: "from-purple-600 to-violet-500"
+    color: "from-purple-900 to-violet-500"
   },
   {
     icon: "🎤",
     title: "Assistente Vocale",
     description: "Sempre disponibile per ogni funzione, attivabile con la spacebar o comandi personalizzabili.",
     shortcut: "Space",
-    color: "from-violet-600 to-purple-500"
+    color: "from-violet-600 to-purple-800"
   },
   {
     icon: "🔎",
     title: "Ricerca Avanzata",
     description: "Cerca i tuoi file per nome, filtri o categorie. Include cronologia ricerche e accesso rapido ai preferiti.",
     shortcut: "S",
-    color: "from-purple-500 to-violet-600"
+    color: "from-purple-800 to-violet-600"
   },
   {
     icon: "⭐",
     title: "File Preferiti",
     description: "Accesso immediato ai documenti più utilizzati con sistema di stelle e cronologia intelligente.",
     shortcut: "F",
-    color: "from-violet-500 to-purple-600"
+    color: "from-violet-500 to-purple-900"
   }
 ];
 export function Features() {
@@ -728,7 +728,7 @@ export function Features() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-6">
+          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-violet-600 mb-6">
             Funzionalità Principali
           </h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
@@ -820,7 +820,7 @@ export function Analysis() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-6">
+          <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-violet-600 mb-6">
             Analisi della Soluzione
           </h2>
           <p className="text-xl text-gray-700">
@@ -922,19 +922,19 @@ export function Analysis() {
           className="mt-12"
         >
           <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-violet-600 rounded-3xl opacity-30 blur-xl" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-800 to-violet-600 rounded-3xl opacity-30 blur-xl" />
 
             {false && <div className="relative bg-white rounded-3xl p-10 shadow-2xl border-2 border-purple-100">
               <div className="flex items-start gap-6">
-                <div className="flex-none w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg flex items-center justify-center">
+                <div className="flex-none w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-800 to-violet-600 shadow-lg flex items-center justify-center">
                   <span className="text-3xl">💻</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600 mb-4">
+                  <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-violet-600 mb-4">
                     Perché Desktop?
                   </h3>
                   <p className="text-lg text-gray-700 leading-relaxed">
-                    Il team ha scelto l'<span className="font-bold text-purple-600">app desktop</span> perché il progetto
+                    Il team ha scelto l'<span className="font-bold text-purple-900">app desktop</span> perché il progetto
                     nasceva per supportare lo studio dei non vedenti, e il desktop è l'ambiente più adatto. Gli
                     <span className="font-bold text-violet-600"> screen reader sono più completi</span>, la gestione dei
                     file è diretta e stabile, e l'interazione con documenti e strumenti di studio risulta molto più fluida
