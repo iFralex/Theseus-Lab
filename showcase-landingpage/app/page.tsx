@@ -11,37 +11,37 @@ const TEAM_MEMBERS = [
     id: 1,
     name: "Alessio Brambilla",
     role: "Team Lead & Research",
-    image: "/imgs/ale b.jpeg"
+    image: "/imgs/ale b.png"
   },
   {
     id: 2,
     name: "Davide Celia",
     role: "UX Designer",
-    image: "/imgs/davide.jpeg"
+    image: "/imgs/davide.png"
   },
   {
     id: 3,
     name: "Dennis Ferrari",
     role: "Developer",
-    image: "/imgs/dennis.jpeg"
+    image: "/imgs/dennis.png"
   },
   {
     id: 4,
     name: "Denise Luzzi",
     role: "Accessibility Specialist",
-    image: "/imgs/denise.jpeg"
+    image: "/imgs/denise.png"
   },
   {
     id: 5,
     name: "Alessio Antonucci",
     role: "Product Manager",
-    image: "/imgs/ale a.jpeg"
+    image: "/imgs/ale a.png"
   },
   {
     id: 6,
     name: "Emanuele Parinetti",
     role: "System Architect",
-    image: "/imgs/ema.jpeg"
+    image: "/imgs/ema.png"
   }
 ];
 
@@ -52,9 +52,9 @@ const PROCESS_STEPS = [
     title: "Individuazione dei Bisogni",
     summary: "Fase iniziale di ricerca per comprendere le necessità degli utenti ipovedenti nel contesto universitario.",
     details: [
-      "Selezione di utenti target (studenti ipovedenti), estremi ed esperti di dominio [1, 2].",
-      "Conduzione di interviste strutturate divise in domande generali, inerenti al tema e di opinione [3, 4].",
-      "Analisi dei risultati preliminari riguardanti la mobilità nel campus e l'accessibilità digitale [5, 6]."
+      "Selezione di utenti target (studenti ipovedenti), estremi ed esperti di dominio.",
+      "Conduzione di interviste strutturate divise in domande generali, inerenti al tema e di opinione.",
+      "Analisi dei risultati preliminari riguardanti la mobilità nel campus e l'accessibilità digitale."
     ],
     icon: "🔍",
     color: "from-blue-500 to-cyan-600",
@@ -67,9 +67,9 @@ const PROCESS_STEPS = [
     title: "Raffinamento e Focus",
     summary: "Cambio di prospettiva basato sulle testimonianze degli utenti, passando dalla mobilità all'accessibilità didattica.",
     details: [
-      "Individuazione della criticità legata all'accesso ai testi scolastici e formule matematiche [7].",
-      "Sessioni di brainstorming per definire la Value Proposition: 'L’inclusione è il nostro formato' [8, 9].",
-      "Riconsiderazione dei bisogni finali: intercompatibilità software e uniformità dei testi digitali [10, 11]."
+      "Individuazione della criticità legata all'accesso ai testi scolastici e formule matematiche.",
+      "Sessioni di brainstorming per definire la Value Proposition: 'L’inclusione è il nostro formato'.",
+      "Riconsiderazione dei bisogni finali: intercompatibilità software e uniformità dei testi digitali."
     ],
     icon: "💡",
     color: "from-amber-400 to-orange-500",
@@ -82,9 +82,9 @@ const PROCESS_STEPS = [
     title: "Task, Storyboard e Primi Prototipi",
     summary: "Analisi dei compiti degli utenti e visualizzazione degli scenari d'uso tramite storyboard.",
     details: [
-      "Definizione dei task (semplice, moderato, complesso) con analisi HTA [12-14].",
-      "Creazione di storyboard per illustrare la ricerca documenti e la lettura assistita [15].",
-      "Confronto tra soluzioni Mobile e Desktop, con scelta finale della versione Desktop per solidità tecnica [16, 17]."
+      "Definizione dei task (semplice, moderato, complesso) con analisi HTA.",
+      "Creazione di storyboard per illustrare la ricerca documenti e la lettura assistita.",
+      "Confronto tra soluzioni Mobile e Desktop, con scelta finale della versione Desktop per solidità tecnica."
     ],
     icon: "📝",
     color: "from-purple-500 to-indigo-600",
@@ -97,9 +97,9 @@ const PROCESS_STEPS = [
     title: "Sviluppo e Raffinamento del Prototipo",
     summary: "Progettazione di un'interfaccia interattiva ad alta fedeltà focalizzata sull'assistente vocale.",
     details: [
-      "Design di una Home Page intuitiva con pulsanti larghi e contrasto elevato [18].",
-      "Implementazione di shortcut da tastiera per ogni funzione principale (Esplora, Converti, Analisi) [18, 19].",
-      "Integrazione di un assistente vocale interattivo per la gestione assistita dei file .ink [20, 21]."
+      "Design di una Home Page intuitiva con pulsanti larghi e contrasto elevato.",
+      "Implementazione di shortcut da tastiera per ogni funzione principale (Esplora, Converti, Analisi).",
+      "Integrazione di un assistente vocale interattivo per la gestione assistita dei file .ink."
     ],
     icon: "💻",
     color: "from-emerald-500 to-teal-600",
@@ -112,9 +112,9 @@ const PROCESS_STEPS = [
     title: "Valutazione Euristica di StudiaMi",
     summary: "Test del prototipo del progetto mid-fidelity del team StudiaMi per identificare criticità di usabilità basate sulle euristiche di Nielsen.",
     details: [
-      "Individuazione di violazioni riguardanti la consistenza (H4) e il controllo utente (H3) [22, 23].",
-      "Analisi dei problemi specifici come il feedback mancante nell'iscrizione ai gruppi studio [24, 25].",
-      "Stesura di raccomandazioni per migliorare la prevenzione degli errori e la visibilità dello stato [26, 27]."
+      "Individuazione di violazioni riguardanti la consistenza (H4) e il controllo utente (H3).",
+      "Analisi dei problemi specifici come il feedback mancante nell'iscrizione ai gruppi studio.",
+      "Stesura di raccomandazioni per migliorare la prevenzione degli errori e la visibilità dello stato."
     ],
     icon: "✅",
     color: "from-rose-500 to-red-600",
@@ -200,19 +200,13 @@ export function Hero() {
                 {/* Main Card */}
                 <div className="relative bg-white rounded-3xl p-8 shadow-2xl border-4 border-purple-200">
                   <div className="space-y-6">
-                    {/* Icon Grid */}
-                    <div className="grid grid-cols-3 gap-4">
-                      {['📁', '🔄', '🔍', '🎤', '📊', '⭐'].map((icon, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ scale: 0, rotate: -180 }}
-                          animate={{ scale: 1, rotate: 0 }}
-                          transition={{ delay: 0.5 + i * 0.1, type: "spring" }}
-                          className="aspect-square rounded-2xl bg-gradient-to-br from-purple-100 to-violet-100 flex items-center justify-center text-4xl"
-                        >
-                          {icon}
-                        </motion.div>
-                      ))}
+                    {/* Image with centered button */}
+                    <div className="relative rounded-2xl border border-4 overflow-hidden">
+                      <img
+                        src="/Theseus-Lab/imgs/app-home.png"
+                        alt="App Home"
+                        className="w-full h-auto"
+                      />
                     </div>
 
                     {/* Feature List */}
@@ -229,6 +223,20 @@ export function Hero() {
                           <span className="text-gray-700 font-medium">{text}</span>
                         </motion.div>
                       ))}
+                    </div>
+
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <motion.button
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.3, type: "spring" }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => window.open("https://www.figma.com/design/xZXA8SyWoVP4Lmv6xkZMnz/Inklusion---prototipi?node-id=0-1&p=f&t=YUp0cqwYZc2GqC9d-0", "_blank")}
+                        className="px-6 py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                      >
+                        Vedi Figma
+                      </motion.button>
                     </div>
                   </div>
 
@@ -430,8 +438,7 @@ export function Team() {
                       transition={{ duration: 0.4 }}
                       src={"/Theseus-Lab" + member.image}
                       alt={member.name}
-                      className="w-full h-full object-cover grayscale
-      group-hover:grayscale-0 transition-all duration-300"
+                      className="w-full h-full object-cover  transition-all duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-violet-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
