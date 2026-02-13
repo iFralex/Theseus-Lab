@@ -2,6 +2,6 @@
 2:I[42387,["/Theseus-Lab/_next/static/chunks/92ac3426561fbb10.js"],"ViewportBoundary"]
 4:I[42387,["/Theseus-Lab/_next/static/chunks/92ac3426561fbb10.js"],"MetadataBoundary"]
 5:"$Sreact.suspense"
-0:{"buildId":"RVlttkTFliRkV-U83ZRK5","rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"RnD6N4h5lk1jTnPMZ0HcL","rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
 3:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 6:[["$","title","0",{"children":"Inklusion"}],["$","meta","1",{"name":"description","content":"Theseus Lab project for the Fondamentals of human computer and interaction course"}]]
