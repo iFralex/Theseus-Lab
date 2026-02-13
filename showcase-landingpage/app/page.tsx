@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { FaFigma, FaGithub } from "react-icons/fa";
 
 // Inklusion Project Showcase - Team THESEUS
 // Enhanced design with consistent color palette: white, lilla (#F6EEFF), violet (#6C3D9A)
@@ -121,7 +122,24 @@ const PROCESS_STEPS = [
     bgColor: "bg-rose-50",
     slidePreview: "/imgs/c5.png",
     slideDownload: "/files/c5.pdf",
+  },
+  {
+    step: 6,
+    title: "Usability Testing e Iterazione High-Fidelity",
+    summary: "Validazione del prototipo high-fidelity tramite test di usabilità con studenti ipovedenti e analisi qualitativa dei feedback.",
+    details: [
+      "Test di usabilità online con 3 studenti ipovedenti, con protocollo think-aloud e questionario finale.",
+      "Valutazione di esplorazione file, analisi formule e conversione in .ink tramite task guidati.",
+      "Individuazione di criticità su icone, contrasto e dimensione dei font, con proposte di miglioramento."
+    ],
+
+    icon: "🧪",
+    color: "from-slate-600 to-gray-800",
+    bgColor: "bg-slate-50",
+    slidePreview: "/imgs/c6.png",
+    slideDownload: "/files/c6.pdf",
   }
+
 ];
 
 // ------ Hero Section ------
@@ -171,18 +189,54 @@ export function Hero() {
 
               <div className="flex flex-wrap gap-4">
                 <motion.a
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  href="https://www.figma.com/design/xZXA8SyWoVP4Lmv6xkZMnz/Inklusion---prototipi?node-id=0-1&p=f&t=YUp0cqwYZc2GqC9d-0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Vai al progetto Figma"
+                  className="w-16 h-16 flex items-center justify-center 
+                    rounded-full 
+                    bg-gradient-to-r from-purple-900 to-violet-600 
+                    text-white text-3xl 
+                    shadow-2xl hover:shadow-purple-800/50 
+                    transition-all"
+                  role="button"
+                >
+                  <FaFigma />
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  href="https://github.com/iFralex/Theseus-Lab"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Vai al repository GitHub"
+                  className="w-16 h-16 flex items-center justify-center 
+                    rounded-full 
+                    bg-gradient-to-r from-purple-900 to-violet-600 
+                    text-white text-3xl 
+                    shadow-2xl hover:shadow-purple-800/50 
+                    transition-all"
+                  role="button"
+                >
+                  <FaGithub />
+                </motion.a>
+                <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="#steps"
                   className="px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-900 to-violet-600 text-white font-bold text-lg shadow-2xl hover:shadow-purple-800/50 transition-all"
+                  role="button"
                 >
-                  Scopri il Progetto
+                  Scopri il Processo
                 </motion.a>
                 <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="#team"
                   className="px-8 py-4 rounded-2xl bg-white border-2 border-purple-300 text-purple-700 font-bold text-lg shadow-lg hover:border-purple-400 hover:bg-purple-50 transition-all"
+                  role="button"
                 >
                   Il Team
                 </motion.a>
@@ -206,6 +260,7 @@ export function Hero() {
                         src="/Theseus-Lab/imgs/app-home.png"
                         alt="App Home"
                         className="w-full h-auto"
+                        aria-hidden="true"
                       />
                     </div>
 
@@ -225,7 +280,7 @@ export function Hero() {
                       ))}
                     </div>
 
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    {false && <div className="absolute inset-0 flex items-center justify-center">
                       <motion.button
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
@@ -237,11 +292,11 @@ export function Hero() {
                       >
                         Vedi Figma
                       </motion.button>
-                    </div>
+                    </div>}
                   </div>
 
                   {/* Corner Accent */}
-                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-violet-400 to-purple-900 rounded-2xl rotate-12 shadow-xl flex items-center justify-center text-4xl">
+                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-violet-400 to-purple-900 rounded-2xl rotate-12 shadow-xl flex items-center justify-center text-4xl" aria-hidden>
                     💜
                   </div>
                 </div>
@@ -315,7 +370,7 @@ export function MissionGoals() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-800 to-violet-600 rounded-3xl blur-xl opacity-50" />
               <div className="relative w-24 h-24 rounded-3xl bg-gradient-to-br from-purple-800 to-violet-600 shadow-2xl flex items-center justify-center">
-                <span className="text-5xl">🎯</span>
+                <span className="text-5xl" aria-hidden>🎯</span>
               </div>
             </div>
           </motion.div>
@@ -340,7 +395,7 @@ export function MissionGoals() {
 
             <div className="relative bg-white rounded-3xl p-12 shadow-2xl border-2 border-purple-100">
               <div className="flex items-start gap-6">
-                <div className="flex-none w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-800 to-violet-600 shadow-lg flex items-center justify-center text-3xl">
+                <div className="flex-none w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-800 to-violet-600 shadow-lg flex items-center justify-center text-3xl" aria-hidden>
                   💡
                 </div>
                 <div className="flex-1">
@@ -378,6 +433,7 @@ export function MissionGoals() {
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                   className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${goal.color} shadow-lg mb-6`}
+                  aria-hidden
                 >
                   <span className="text-3xl font-bold text-white">{goal.icon}</span>
                 </motion.div>
@@ -419,43 +475,49 @@ export function Team() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {TEAM_MEMBERS.map((member, i) => (
-            <motion.div
-              key={member.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="group"
+            <div key={member.id}
+              tabIndex={0}
+              aria-label={member.name}
+              role="group"
             >
-              <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-800 to-violet-600 rounded-2xl opacity-20 group-hover:opacity-40 blur-xl transition-opacity" />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -10 }}
+                className="group"
+              >
+                <span className="sr-only">{member.name}</span>
+                <div className="relative" aria-hidden>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-800 to-violet-600 rounded-2xl opacity-20 group-hover:opacity-40 blur-xl transition-opacity" />
 
-                <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-purple-100">
-                  <div className="relative h-64 bg-gradient-to-br from-purple-200 to-violet-200 overflow-hidden">
-                    <motion.img
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.4 }}
-                      src={"/Theseus-Lab" + member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover  transition-all duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-violet-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
+                  <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-purple-100">
+                    <div className="relative h-64 bg-gradient-to-br from-purple-200 to-violet-200 overflow-hidden">
+                      <motion.img
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.4 }}
+                        src={"/Theseus-Lab" + member.image}
+                        alt={member.name}
+                        className="w-full h-full object-cover  transition-all duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-violet-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
 
-                  <div className="p-6 text-center">
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">
-                      {member.name}
-                    </h3>
-                    {true
-                      ? <div className="bg-purple-900 max-w-16 h-1 rounded-full mx-auto mt-2" />
-                      : <p className="text-purple-900 font-semibold">
-                        {member.role}
-                      </p>}
+                    <div className="p-6 text-center">
+                      <h3 className="text-xl font-bold text-gray-800 mb-2">
+                        {member.name}
+                      </h3>
+                      {true
+                        ? <div className="bg-purple-900 max-w-16 h-1 rounded-full mx-auto mt-2" />
+                        : <p className="text-purple-900 font-semibold">
+                          {member.role}
+                        </p>}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -488,7 +550,7 @@ export function ProcessSteps() {
             Dal Concept alla Realizzazione
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Quattro fasi fondamentali per creare una soluzione accessibile e inclusiva
+            Sei fasi fondamentali per creare una soluzione accessibile e inclusiva
           </p>
         </motion.div>
 
@@ -512,6 +574,7 @@ export function ProcessSteps() {
                     viewport={{ once: true }}
                     transition={{ type: "spring", duration: 0.8 }}
                     className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br ${step.color} shadow-2xl mb-6 transform rotate-6`}
+                    aria-hidden
                   >
                     <span className="text-4xl">{step.icon}</span>
                   </motion.div>
@@ -529,7 +592,7 @@ export function ProcessSteps() {
                     {step.summary}
                   </p>
 
-                  <div className="space-y-4">
+                  <div className="space-y-4" role="list">
                     {step.details.map((detail, i) => (
                       <motion.div
                         key={i}
@@ -539,10 +602,10 @@ export function ProcessSteps() {
                         transition={{ delay: 0.3 + i * 0.1 }}
                         className="flex items-start gap-4 group"
                       >
-                        <div className={`flex-none w-8 h-8 rounded-lg bg-gradient-to-br ${step.color} shadow-md flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                        <div className={`flex-none w-8 h-8 rounded-lg bg-gradient-to-br ${step.color} shadow-md flex items-center justify-center group-hover:scale-110 transition-transform`} aria-hidden>
                           <span className="text-white font-bold text-sm">✓</span>
                         </div>
-                        <p className="text-gray-600 leading-relaxed flex-1 group-hover:text-gray-800 transition-colors">
+                        <p className="text-gray-600 leading-relaxed flex-1 group-hover:text-gray-800 transition-colors" role="listitem">
                           {detail}
                         </p>
                       </motion.div>
@@ -571,6 +634,7 @@ export function ProcessSteps() {
                           src={"/Theseus-Lab" + step.slidePreview}
                           alt={`Slide ${step.step}`}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" // 👈 TRIGGER SULLA GROUP DI TUTTO LO STEP
+                          aria-hidden
                         />
 
                         {/* Gradient hover overlay */}
@@ -586,8 +650,10 @@ export function ProcessSteps() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="py-3 px-6 rounded-xl bg-white border-2 border-purple-200 text-purple-900 font-semibold hover:border-purple-400 hover:bg-purple-50 transition-all flex items-center justify-center gap-2"
+                            role="button"
+                            aria-label={"Scarica la presentazione dello step: " + step.title}
                           >
-                            <span>⬇️</span>
+                            <span aria-hidden>⬇️</span>
                             <span>Download</span>
                           </motion.a>
                         </motion.div>
@@ -762,6 +828,7 @@ export function Features() {
                   whileHover={{ rotate: 360, scale: 1.2 }}
                   transition={{ duration: 0.6 }}
                   className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br ${feature.color} shadow-lg mb-6`}
+                  aria-hidden
                 >
                   <span className="text-4xl">{feature.icon}</span>
                 </motion.div>
@@ -840,7 +907,7 @@ export function Analysis() {
 
               <div className="relative h-full bg-white rounded-3xl p-8 shadow-2xl border-2 border-green-100">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg flex items-center justify-center" aria-hidden>
                     <span className="text-3xl">✓</span>
                   </div>
                   <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">
@@ -848,7 +915,7 @@ export function Analysis() {
                   </h3>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4" role="list">
                   {strengths.map((strength, i) => (
                     <motion.div
                       key={i}
@@ -857,8 +924,9 @@ export function Analysis() {
                       viewport={{ once: true }}
                       transition={{ delay: 0.1 * i }}
                       className="flex items-start gap-4 group"
+                      role="listitem"
                     >
-                      <div className="flex-none w-6 h-6 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 shadow-md flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                      <div className="flex-none w-6 h-6 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 shadow-md flex items-center justify-center mt-1 group-hover:scale-110 transition-transform" aria-hidden>
                         <span className="text-white text-sm font-bold">+</span>
                       </div>
                       <p className="text-gray-700 leading-relaxed flex-1">
@@ -882,7 +950,7 @@ export function Analysis() {
 
               <div className="relative h-full bg-white rounded-3xl p-8 shadow-2xl border-2 border-orange-100">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 shadow-lg flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 shadow-lg flex items-center justify-center" aria-hidden>
                     <span className="text-3xl">⚠</span>
                   </div>
                   <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-600">
@@ -890,7 +958,7 @@ export function Analysis() {
                   </h3>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4" role="list">
                   {weaknesses.map((weakness, i) => (
                     <motion.div
                       key={i}
@@ -899,8 +967,9 @@ export function Analysis() {
                       viewport={{ once: true }}
                       transition={{ delay: 0.1 * i }}
                       className="flex items-start gap-4 group"
+                      role="listitem"
                     >
-                      <div className="flex-none w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-red-500 shadow-md flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                      <div className="flex-none w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-red-500 shadow-md flex items-center justify-center mt-1 group-hover:scale-110 transition-transform" aria-hidden>
                         <span className="text-white text-sm font-bold">!</span>
                       </div>
                       <p className="text-gray-700 leading-relaxed flex-1">
